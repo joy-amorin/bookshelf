@@ -27,6 +27,6 @@ class ReadingPlan(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
 
-    #def __str__(self):
-     #   return f"Plan for {self.book.title}"
+    def __str__(self):
+        return f"Plan for {self.book.title}"
     
