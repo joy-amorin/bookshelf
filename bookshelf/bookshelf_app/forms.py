@@ -7,6 +7,6 @@ class BookForm(forms.ModelForm):
         fields = ['title', 'author', 'genre', 'pages']
 
 class ReadingPlanForm(forms.ModelForm):
-    class Metea:
+    class Meta:
         model = ReadingPlan
         fields = ['book', 'start_date', 'end_date']
