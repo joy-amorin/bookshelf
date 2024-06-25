@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import BookForm, ReadingPlanForm 
+from .forms import BookForm, ReadingPlanForm
+from .models import Book
 
 # Create your views here.
 def index(request):
@@ -25,3 +26,7 @@ def create_reading_plan(request):
     else:
         form = ReadingPlanForm()
     return render(request, 'create_reading_plan.html', {'form': form})
+
+def book_list(request):
+    books = Book.objects.all()
+    return render(request, 'book_list.html', {'books': books})
