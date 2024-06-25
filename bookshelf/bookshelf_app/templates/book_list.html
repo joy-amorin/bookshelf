@@ -1,0 +1,16 @@
+<!-- book_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+</head>
+<body>
+    <h1>Book List</h1>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} by {{ book.author.name }} - Genre: {{ book.genre.name }} - Pages: {{ book.pages }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_book' %}">Add a new book</a>
+</body>
+</html>
