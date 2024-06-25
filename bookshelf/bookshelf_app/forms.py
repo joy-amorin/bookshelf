@@ -18,7 +18,7 @@ class BookForm(forms.ModelForm):
 
         #get or create the author and genre
         author, created = Author.objects.get_or_create(name=author_name)
-        genre, created = Author.objects.get_or_create(name=genre_name)
+        genre, created = Genre.objects.get_or_create(name=genre_name)
 
         #assign author and genre to the book
         book.author = author
