@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ book.title }}</title>
+    </head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p>Author: {{ book.author.name }}</p>
+    <p>Genre: {{ book.genre.name}}</p>
+    <p>Status: {% if book.status %}Read{% else %}Not Read {% endif %}</p>
+</body>
+</html>
