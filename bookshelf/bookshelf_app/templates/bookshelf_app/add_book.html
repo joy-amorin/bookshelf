@@ -7,9 +7,17 @@
         <h1>Agregar nuevo libro</h1>
         <form method="post">
             {% csrf_token %}
-            {{form.as_p}}
+            <h2>Libro</h2>
+            {{book_form.as_p}} <!--Show the book form-->
+
+            <h2>Autor</h2>
+            {{author_form.as_p}} <!--Show the author form-->
+
+            <h2>Género</h2>
+            {{genre_form.as_p}} <!--Shw the genre form-->
 
             <button type="submit">Guardar</button>
         </form>
+        <a href="{% url 'books_list' %}">Volver a la lista de libros</a>
     </body>
 </html>
