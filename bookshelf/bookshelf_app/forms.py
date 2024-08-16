@@ -4,14 +4,14 @@ from .models import Book, Genre, Author
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ['title','status']
+        fields = ['title', 'author','genre', 'pages']
 
 class AuthorForm(forms.ModelForm):
     class Meta:
         model = Author
-        fields =['name']
+        fields = ['nombre']
 
-class GenreForm(forms.ModelForm):
+class GenreForm(forms.ModelFolrm):
     class Meta:
         model = Genre
-        fields = ['name']
+        fields = ['nombre']
