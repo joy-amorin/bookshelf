@@ -3,12 +3,9 @@
     <head>
         <title>{{ book.title }}</title>
     </head>
-    <body>
-        <h1>{{ book.title }}</h1>
-        <p>Author: {{ book.author.name }}</p>
-        <p>Genre: {{ book.genre.name}}</p>
-        <p>Status: {% if book.status %}Read{% else %}Not Read {% endif %}</p>
-        <a href="{% url 'add_book' %}">Agregar otro libro</a>
-        <a href="{% url 'book_detail' book.id %}delete/">Eliminar este libro</a>
-    </body>
+    <h1>{{ book.title }}</h1>
+    <p>Autor: {{ book.author.author }}</p>
+    <p>Género: {{ book.genre.genre }}</p>
+    <a href="{% url 'add_book' %}">Agregar otro libro</a>
+
 </html>

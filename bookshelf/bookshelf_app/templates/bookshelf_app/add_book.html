@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Agregar libro</title>
+        <title>Agregar Libro</title>
     </head>
     <body>
         <h1>Agregar nuevo libro</h1>
-        <form method="post">
+        <form method="POST">
             {% csrf_token %}
             <h2>Libro</h2>
-            {{book_form.as_p}} <!--Show the book form-->
-
+            {{ book_form.as_p }}
             <h2>Autor</h2>
-            {{author_form.as_p}} <!--Show the author form-->
-
+            {{ author_form.as_p }}
             <h2>Género</h2>
-            {{genre_form.as_p}} <!--Shw the genre form-->
+            {{ genre_form.as_p }}
+            <a href="{% url 'books_list' %}">Lista de Libros</a>
 
             <button type="submit">Guardar</button>
         </form>
-        <a href="{% url 'books_list' %}">Volver a la lista de libros</a>
     </body>
 </html>

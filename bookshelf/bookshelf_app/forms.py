@@ -1,17 +1,18 @@
 from django import forms
-from .models import Book, Genre, Author
+from .models import Book, Author, Genre
 
 class BookForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = ['title', 'author','genre', 'pages']
+        fields = ['title']
 
 class AuthorForm(forms.ModelForm):
     class Meta:
         model = Author
-        fields = ['nombre']
+        fields = ['author']
 
-class GenreForm(forms.ModelFolrm):
+class GenreForm(forms.ModelForm):
     class Meta:
         model = Genre
-        fields = ['nombre']
+        fields = ['genre']
+
