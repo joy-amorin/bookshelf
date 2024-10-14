@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BookForm, AuthorForm, GenreForm
 from .models import Book, Author, Genre
 from django.contrib import messages
+from rest_framework.decorators import api_view
+from .serializers import BookSerializer, AuthorSerializer, GenreSerializer
+from rest_framework.response import Response
 
 import unicodedata
 
@@ -71,3 +74,15 @@ def delete_book(request, book_id):
     messages.success(request, f"El libro {book.title} fue eliminado exitosamente")
 
     return redirect('books_list')
+
+@api_view(['GET'])
+def api_book_list(request):
+    books = Book.objects.all()
+    serializer = BookSerializer(books, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def api_book_detail(request, book_id):
+    book = Book.objects.get(id=book_id)
+    serializer = BookSerializer(book)
+    return Response(serializer.data)
