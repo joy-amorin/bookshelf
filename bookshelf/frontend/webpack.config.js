@@ -28,5 +28,6 @@ module.exports = {
     static: path.join(__dirname, 'static/frontend'),
     compress: true,
     port: 3000,
+    historyApiFallback: true,
   },
 };

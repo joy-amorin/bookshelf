@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -23,9 +24,12 @@ const BookList = () => {
       <h1>Lista de Libros</h1>
       <ul>
         {books.map((book) => (
-          <li key={book.id}>{book.title} - {book.author.author}</li>
+          <li key={book.id}>
+            <Link to={`/books/${book.id}`}>{book.title}</Link>
+          </li>  
         ))}
       </ul>
+      <Link to="/add">Agregar Libro</Link>
     </div>
   );
 };
