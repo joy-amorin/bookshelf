@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AddBook = () => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [genre, setGenre] = useState('');
+    const [sucessMessage, setSucessMessage] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,6 +32,10 @@ const AddBook = () => {
             if (response.ok) {
                 const data = await response.json();
                 console.log('Libro agregado:', data);
+                setSucessMessage('¡El libro fue agregado exitosamente!')
+                setTitle('');
+                setAuthor('');
+                setGenre('');
             } else {
                 const errorData = await response.json();
                 console.error('Error al agregar libro:', errorData);
@@ -40,30 +46,34 @@ const AddBook = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="título del libro"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-            />
-            <input
-                type="text"
-                placeholder="autor"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-                required
-            />
-            <input
-                type="text"
-                placeholder="género"
-                value={genre}
-                onChange={(e) => setGenre(e.target.value)}
-                required
-            />
-            <button type="submit">Agregar Libro</button>
-        </form>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="título del libro"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                />
+                <input
+                    type="text"
+                    placeholder="autor"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
+                    required
+                />
+                <input
+                    type="text"
+                    placeholder="género"
+                    value={genre}
+                    onChange={(e) => setGenre(e.target.value)}
+                    required
+                />
+                <button type="submit">Agregar Libro</button>
+            </form>
+            {sucessMessage && <p>{sucessMessage}</p>}
+            <Link to="/">Ir a la lista de libros</Link>
+        </div>
     );
 };
 

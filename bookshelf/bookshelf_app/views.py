@@ -22,6 +22,15 @@ def api_add_book(request):
         serializer.save()
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)
+@api_view(['DELETE'])
+def api_delete_book(request, book_id):
+    try:
+        book = Book.objects.get(id=book_id)
+        book.delete()
+        return Response({"message": "Libro Eliminado Exitosamente"}, status=204)
+    except Book.DoesNotExist:
+        return Response({"error": "Libro no encontrado"}, status=404)
+    
 
 
 @api_view(['GET'])
@@ -44,11 +53,5 @@ def book_detail(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     return render(request, 'bookshelf_app/book_detail.html', {'book': book})"""
 
-def delete_book(request, book_id):
-    book = get_object_or_404(Book, pk=book_id)
 
-    book.delete()
-    messages.success(request, f"El libro {book.title} fue eliminado exitosamente")
-
-    return redirect('books_list')
 
