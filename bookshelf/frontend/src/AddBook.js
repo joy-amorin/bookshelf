@@ -32,15 +32,20 @@ const AddBook = () => {
             if (response.ok) {
                 const data = await response.json();
                 console.log('Libro agregado:', data);
-                setSucessMessage('¡El libro fue agregado exitosamente!')
+                setSucessMessage(`El libro "${data.title}" fue agregado conéxito`)
                 setTitle('');
                 setAuthor('');
                 setGenre('');
             } else {
                 const errorData = await response.json();
+                setSucessMessage(`Error: ${errorData.error || 'No se puede agregar libro'}`);
                 console.error('Error al agregar libro:', errorData);
+                setTitle('');
+                setAuthor('');
+                setGenre('');
             }
         } catch (error) {
+            setSucessMessage('Error en la solicitud. Inténtalo de nuevo.');
             console.error('Error en la solicitud', error);
         }
     };

@@ -19,9 +19,23 @@ def api_add_book(request):
     serializer = BookSerializer(data=request.data)
 
     if serializer.is_valid():
+        title = remove_accents(serializer.validated_data['title'].lower())
+        author_name = remove_accents(serializer.validated_data['author']['author'].lower())
+
+        #verify if the book already exist
+        books = Book.objects.all()
+
+        for book in books:
+            db_title = remove_accents(book.title.lower())
+            db_author = remove_accents(book.author.author.lower())
+
+            if db_title == title and db_author == author_name:
+                return Response({'error': f'El libro "{serializer.validated_data["title"]}" de "{serializer.validated_data["author"]["author"]}" ya existe'}, status=400)
+                
         serializer.save()
         return Response(serializer.data, status=201)
     return Response(serializer.errors, status=400)
+
 @api_view(['DELETE'])
 def api_delete_book(request, book_id):
     try:
