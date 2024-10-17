@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
+import './style/BookList.css'
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -36,13 +37,15 @@ const BookList = () => {
   }
 
   return (
-    <div>
-      <h1>Lista de Libros</h1>
-      <ul>
+    <div className='book-list-conatiner'>
+      <h1 className='book-list-title'>Lista de Libros</h1>
+      <ul className='book-list'>
         {books.map((book) => (
-          <li key={book.id}>
-            <Link to={`/books/${book.id}`}>{book.title}</Link>
-            <button onClick={()=> handleDelete(book.id)}>Eliminar</button>
+          <li key={book.id} className='book-list-item'>
+            <div className='book-item-container'>
+              <Link to={`/books/${book.id}`} className='book-list-link'>{book.title}</Link>
+              <button onClick={()=> handleDelete(book.id)} className='book-list-button'>Eliminar</button>
+            </div>
           </li>  
         ))}
       </ul>

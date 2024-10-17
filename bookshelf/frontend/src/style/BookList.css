@@ -1,0 +1,45 @@
+.book-list-title {
+    text-align: center;
+    color: #333;
+  }
+
+  .book-list{
+    list-style-type: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .book-list-item {
+    background-color: #707070;
+    margin: 10px 0;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgb(0, 0, 0.1);
+  }
+
+  .book-list-link {
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+  }
+
+  .book-item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .book-list-link:hover {
+    color: #e0e0e0;
+  }
+
+  .book-list-button {
+    background-color:  #bebebe;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right: 20px;
+  }

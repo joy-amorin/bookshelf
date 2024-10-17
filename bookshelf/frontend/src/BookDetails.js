@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+import {Link } from 'react-router-dom';
 const BookDetails = () => {
     const [book, setBook] = useState(null); // Inicializes the book status
     const { id: bookId } = useParams(); // Use useParams to get the ID book
@@ -28,6 +28,7 @@ const BookDetails = () => {
             <h1>{book.title}</h1>
             <p>Autor: {book.author.author}</p>
             <p>Género: {book.genre.genre}</p>
+        <Link to="/">Ir a lista de libros</Link>
         </div>
     );
 };
