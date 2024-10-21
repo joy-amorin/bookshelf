@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import './style/AddBook.css'
 
 const AddBook = () => {
     const [title, setTitle] = useState('');
@@ -51,7 +52,7 @@ const AddBook = () => {
     };
 
     return (
-        <div>
+        <div className="form-container">
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -76,8 +77,11 @@ const AddBook = () => {
                 />
                 <button type="submit">Agregar Libro</button>
             </form>
+            <div className="animation-container"></div>
             {sucessMessage && <p>{sucessMessage}</p>}
-            <Link to="/">Ir a la lista de libros</Link>
+            <Link to="/" className="book-list-link-2">
+                Ir a la lista de libros <i className="fas fa-book"></i> 
+            </Link>
         </div>
     );
 };

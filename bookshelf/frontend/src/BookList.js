@@ -37,19 +37,21 @@ const BookList = () => {
   }
 
   return (
-    <div className='book-list-conatiner'>
+    <div className='book-list-container'>
       <h1 className='book-list-title'>Mi Biblioteca</h1>
       <ul className='book-list'>
         {books.map((book) => (
           <li key={book.id} className='book-list-item'>
             <div className='book-item-container'>
               <Link to={`/books/${book.id}`} className='book-list-link'>{book.title}</Link>
-              <button onClick={()=> handleDelete(book.id)} className='book-list-button'>Eliminar</button>
+              <button onClick={()=> handleDelete(book.id)} className='delete-book-button'>Eliminar</button>
             </div>
           </li>  
         ))}
       </ul>
-      <Link to="/add">Agregar Libro</Link>
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Link to="/add" className='add-book-button'>Agregar Libro</Link>
+      </div>
     </div>
   );
 };

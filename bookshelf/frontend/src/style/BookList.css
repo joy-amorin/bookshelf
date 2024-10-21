@@ -1,5 +1,6 @@
 .book-list-title {
   text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: #444;
   font-size: 24px;
   font-weight: bold;
@@ -9,15 +10,21 @@
 .book-list {
   list-style-type: none;
   padding: 0;
-  max-width: 600px;
+  /*max-width: 600px;*/
   margin: 0 auto;
   background-color: #f9f9f9;
   border-radius: 8px;
   padding: 15px;
 }
 
+.book-list-container{
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+
 .book-list-item {
-  background-color: #e6e6e6;
+  background-color: #d2cece;
   margin: 10px 0;
   padding: 10px 15px;
   border-radius: 8px;
@@ -33,7 +40,8 @@
 
 .book-list-link {
   text-decoration: none;
-  color: #001c39;
+  color: black;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 18px;
   margin-left: 20px;
 }
@@ -43,7 +51,7 @@
   text-decoration: underline;
 }
 
-.book-list-button {
+.delete-book-button {
   background-color: #ff6f61;
   color: white;
   padding: 7px 15px;
@@ -52,13 +60,29 @@
   font-size: 14px;
   border: none;
   margin-right: 20px;
+  text-decoration: none;
   transition: background-color 0.3s ease;
 }
+.add-book-button {
+  margin-top: 20px;
+  background-color: #ff6f61;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  text-decoration: none;
+}
 
-.book-list-button:hover {
+.delete-book-button:hover {
+  background-color: #ff4136;
+}
+
+.add-book-button:hover {
   background-color: #ff4136;
 }
 
 .book-list-item:hover {
-  background-color: #b8b8b8;
+  background-color:  #dadada;
 }

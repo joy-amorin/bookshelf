@@ -1,0 +1,61 @@
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  form input {
+    margin-bottom: 30px;
+  }
+
+  .form-container {
+    position: relative;
+    background-color:#d2cece;
+    border: 8px solid white;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding:  20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+  }
+
+  input {
+    
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  button[type="submit"] {
+    max-width: 350px;
+    background-color: #ff6f61;
+    color: white;
+    margin-bottom: 20px;
+    padding: 7px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #ff4136;
+  }
+
+  .book-list-link-2{
+    margin-top: 20px;
+    text-decoration: none;
+    color: black; 
+  }
+
+  .book-list-link-2:hover {
+    text-decoration-line: underline;
+    color: #0056b3;
+  }
+
+  .book-list-link-2 i {
+    margin-left:2px;
+    color: #ff6f61;
+  }
