@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BookForm, AuthorForm, GenreForm
-from .models import Book, Author, Genre
+from .models import Book, Author, Genre, ReadingPlan
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib import messages
 from rest_framework.decorators import api_view
-from .serializers import BookSerializer, AuthorSerializer, GenreSerializer
+from .serializers import BookSerializer, AuthorSerializer, GenreSerializer, ReadingPlanSerializer
 from rest_framework.response import Response
 
 import unicodedata
@@ -49,7 +49,7 @@ def api_delete_book(request, book_id):
 
 @api_view(['GET'])
 def api_book_list(request):
-    books = Book.objects.all()
+    books = Book.objects.all().order_by('title')
     serializer = BookSerializer(books, many=True)
     return Response(serializer.data)
 
@@ -59,13 +59,19 @@ def api_book_detail(request, book_id):
     serializer = BookSerializer(book)
     return Response(serializer.data)
 
-"""def books_list(request):
-    books = Book.objects.all()
-    return render(request, 'bookshelf_app/books_list.html', {'books': books})
+@api_view(['POST'])
+def add_reading_plan(request):
+    serializer = ReadingPlanSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(serializer.errors, status=400)
 
-def book_detail(request, book_id):
-    book = get_object_or_404(Book, pk=book_id)
-    return render(request, 'bookshelf_app/book_detail.html', {'book': book})"""
+@api_view(['GET'])
+def api_reding_plan_list(request):
+    plans = ReadingPlan.objects.all()
+    serializer = ReadingPlanSerializer(plans, many=True)
+    return Response(serializer.data)
 
 
 

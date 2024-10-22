@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
-import './style/BookList.css'
+import { Link } from 'react-router-dom';
+import './style/BookList.css';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const BookList = () => {
   const [books, setBooks] = useState([]);
@@ -9,7 +11,7 @@ const BookList = () => {
     // Fetch the list of books from the API
     const fetchBooks = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/books/');
+        const response = await fetch('http://127.0.0.1:8000/books/');
         const data = await response.json();
         setBooks(data);
       } catch (error) {
@@ -44,7 +46,11 @@ const BookList = () => {
           <li key={book.id} className='book-list-item'>
             <div className='book-item-container'>
               <Link to={`/books/${book.id}`} className='book-list-link'>{book.title}</Link>
+              <Link to={`/reading-plan/${book.id}`} className='create-plan-button'>
+                Crear plan de lectura
+              </Link>
               <button onClick={()=> handleDelete(book.id)} className='delete-book-button'>Eliminar</button>
+              
             </div>
           </li>  
         ))}

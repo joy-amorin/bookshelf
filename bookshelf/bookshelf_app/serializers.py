@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Author, Book, Genre
+from .models import Author, Book, Genre, ReadingPlan
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,6 +10,12 @@ class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
         fields = ['id', 'genre']
+
+class ReadingPlanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReadingPlan
+        fields = ['id','book', 'pages', 'days', 'pages_per_day']
+        read_only_fields = ['pages_per_day']
 
 class BookSerializer(serializers.ModelSerializer):
     author = AuthorSerializer()  # Para GET

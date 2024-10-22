@@ -19,4 +19,16 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
-    
+
+class ReadingPlan(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    pages = models.PositiveBigIntegerField()
+    pages_per_day = models.PositiveIntegerField()
+    days = models.PositiveIntegerField()
+
+    def save(self, *args, **kwargs):
+
+        if self.days > 0:
+            self.pages_per_day = self.pages // self.days
+
+        super().save(*args, **kwargs)
