@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useParams } from "react-router-dom";
-import axios from 'axios'
-import Calendar from "react-calendar";
+import axios from 'axios';
 
 const ReadingPlan = () => {
     const {bookId} = useParams(); 
     const [pages, setPages] = useState('');
     const [days, setDays] = useState('');
     const [message, setMessage] = useState('');
-    const [completedDays, setCompletedDays] = useState([]); // Días completados
-    const [selectedDate, setSelectedDate] = useState(new Date()); // Fecha seleccionada en el calendario
+    const [dayList, setDayList] = useState([]); // status for the day list
+    const [completeDay, setCompleteDay] = useState([]); // status for the complete days
 
 
     const handleSubmit = async (e) => {
@@ -22,14 +21,24 @@ const ReadingPlan = () => {
             book: bookId,
         });
         setMessage(`Plan de lectura: ${response.data.pages_per_day} páginas por día`)
+
+        // generate days list
+        const totalDays = parseInt(days)
+        const daysArray = Array.from({ length: totalDays}, (_, i)=> i + 1);
+        setDayList(daysArray) //save the days list
+
     }catch (error) {
         setMessage(`Error: ${error.response.data.detail || error.message}`)
     }
     };
-    const handleDayClick = (date) => {
-        if (!completedDays.includes(date.toDateString())) {
-            setCompletedDays([...completedDays, date.toDateString()])
-        }
+    const toggleDayCompletion = (day) => {
+        setCompleteDay((prevCompleteDays) => {
+            if (prevCompleteDays.includes(day)) {
+                return prevCompleteDays.filter((completeDay) => completeDay !== day );    
+            } else {
+                return [...prevCompleteDays, day]
+            }
+        });
     };
 
     return (
@@ -53,20 +62,20 @@ const ReadingPlan = () => {
             </form>
             {message && <p>{message}</p>}
 
-            {/* Calendar */}
-            <Calendar
-                onClickDay={handleDayClick}
-                value={selectedDate}
-            />
-            {/*Show completed days}*/}
-            <div>
-            <h3>Días Completados:</h3>
-                <ul>
-                    {completedDays.map((day, index) => (
-                        <li key={index}>{day}</li>
-                    ))}
-                </ul>
-            </div>
+            <ul>
+                {dayList.map((day) => (
+                    <li key={day}>
+                        <label>
+                            <input 
+                                type="checkbox"
+                                checked={completeDay.includes(day)}
+                                onChange={() => toggleDayCompletion(day)}
+                            />
+                            Día {day}
+                        </label>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };
