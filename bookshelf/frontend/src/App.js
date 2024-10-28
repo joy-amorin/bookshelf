@@ -4,6 +4,7 @@ import BookList from './BookList';
 import BookDetails from './BookDetails';
 import AddBook from './AddBook';
 import ReadingPlan from './ReadingPlan';
+import ReadingPlanView from './ReadingPlanView';
 
 
 function App() {
@@ -14,7 +15,9 @@ function App() {
                     <Route path="/" element={<BookList />} />
                     <Route path="/books/:id" element={<BookDetails />} />
                     <Route path="/add" element={<AddBook />} />
-                    <Route path="/reading-plan/:bookId" element={<ReadingPlan/>} />
+                    <Route path="/reading-plan/:bookId" element={<ReadingPlan />} />
+                    <Route path="/reading-plan-view" element={<ReadingPlanView />} />
+
                 </Routes>
             </div>
         </Router>
