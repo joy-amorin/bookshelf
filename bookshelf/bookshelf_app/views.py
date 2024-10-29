@@ -68,10 +68,30 @@ def add_reading_plan(request):
     return Response(serializer.errors, status=400)
 
 @api_view(['GET'])
-def api_reding_plan_list(request):
+def api_reading_plan_list(request):
     plans = ReadingPlan.objects.all()
     serializer = ReadingPlanSerializer(plans, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def check_reading_plan(request, book_id):
+    try:
+        plan = ReadingPlan.objects.get(book_id=book_id)
+        serializer = ReadingPlanSerializer(plan)
+        return Response(serializer.data, status=200)
+    except:
+        return Response({"message": "Este libro no tiene un plan de lectura asociado"}, status=400)
+
+
+@api_view(['PATCH'])
+def update_progress(request, plan_id):
+    try:
+        plan = ReadingPlan.objects.get(id=plan_id)
+        completed_days = request.data.get('completed_days', [])
+        plan.completed_days = completed_days
+        plan.save()
+        return Response({"message": "Progreso actualizado"}, status=200)
+    except ReadingPlan.DoesNotExist:
+        return Response({"error":"Plan no encontrado"}, status=404)
 
 

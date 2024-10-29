@@ -25,6 +25,7 @@ class ReadingPlan(models.Model):
     pages = models.PositiveBigIntegerField()
     pages_per_day = models.PositiveIntegerField()
     days = models.PositiveIntegerField()
+    completed_days = models.JSONField(default=list)
 
     def save(self, *args, **kwargs):
 
