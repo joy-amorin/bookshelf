@@ -76,11 +76,15 @@ def api_reading_plan_list(request):
 @api_view(['GET'])
 def check_reading_plan(request, book_id):
     try:
-        plan = ReadingPlan.objects.get(book_id=book_id)
-        serializer = ReadingPlanSerializer(plan)
-        return Response(serializer.data, status=200)
-    except:
-        return Response({"message": "Este libro no tiene un plan de lectura asociado"}, status=400)
+        plan = ReadingPlan.objects.filter(book_id=book_id)
+        if plan.exists():
+            serializer = ReadingPlanSerializer(plan, many=True)
+            return Response(serializer.data, status=200)
+        else:
+             return Response({"message": "Este libro no tiene un plan de lectura asociado"}, status=400)
+    except Exception as e:
+        return Response({"message": str(e)}, status=500)
+       
 
 
 @api_view(['PATCH'])
