@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 const ReadingPlanView = () => {
     const location = useLocation();
-    const { dayList, completeDay } = location.state || { dayList: [], completeDay: [] };
+    const { dayList, completeDay, planId } = location.state || { dayList: [], completeDay: [], planId: null };
+
     
-    // Estado local para manejar los días completados
+    // Local status to manage the completed days
     const [completedDays, setCompletedDays] = useState(completeDay);
 
     const toggleDayCompletion = (day) => {
@@ -17,6 +19,19 @@ const ReadingPlanView = () => {
             }
         });
     };
+
+    //Method to save the progress
+    const SaveProgress = async () => {
+        try {
+            await axios.patch(`http://localhost:8000/reading-plans/update-progress/${planId}/`, {
+                completed_days: completedDays
+            });
+            alert('Progreso guardado')
+        } catch(error) {
+            alert(`Error al guardar el progreso: ${error.response?.data?.detail || error.message}`)
+        }
+    };
+
 
     return (
         <div>
@@ -35,6 +50,7 @@ const ReadingPlanView = () => {
                     </li>
                 ))}
             </ul>
+            <button onClick={SaveProgress}>Guardar Progreso</button>
         </div>
     );
 };

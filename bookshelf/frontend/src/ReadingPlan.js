@@ -9,6 +9,7 @@ const ReadingPlan = () => {
     const [message, setMessage] = useState('');
     const [dayList, setDayList] = useState([]); // estado para la lista de días
     const [completeDay, setCompleteDay] = useState([]); // estado para los días completados
+    const [planId, setPlainId] = useState(null); // Estado para el id del plan de lectura
     const navigate = useNavigate(); // hook para navegación
 
     const handleSubmit = async (e) => {
@@ -20,6 +21,7 @@ const ReadingPlan = () => {
                 days: parseInt(days),
                 book: bookId,
             });
+            setPlainId(response.data.id);
             setMessage(`Plan de lectura: ${response.data.pages_per_day} páginas por día`);
 
             // Generar la lista de días
@@ -54,7 +56,7 @@ const ReadingPlan = () => {
             {message && <p>{message}</p>}
 
             {message && dayList.length > 0 && ( // Mostrar el botón solo si hay mensaje y días
-                <button onClick={() => navigate('/reading-plan-view', { state: { dayList, completeDay } })}>
+                <button onClick={() => navigate('/reading-plan-view', { state: { dayList, completeDay: [], planId } })}>
                     Ver Plan
                 </button>
             )}
